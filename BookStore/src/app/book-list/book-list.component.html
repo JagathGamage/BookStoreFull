@@ -1,0 +1,35 @@
+<div class="book-list">
+    <h2>Book List</h2>
+    <button class="add-book-btn" (click)="navigateToAddBook()">Add Book</button>
+    <!-- Show error message if fetching books fails -->
+    <div *ngIf="errorMessage" class="error">
+      {{ errorMessage }}
+    </div>
+  
+    <!-- Show the list of books -->
+    <div *ngIf="books && books.length > 0; else noBooks" class="book-items">
+      <div class="book-card" *ngFor="let book of books">
+        <h3>{{ book.title }}</h3>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Published:</strong> {{ book.publishedDate }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <button class="edit-book-btn" (click)="navigateToEditBook(book)">Edit</button>
+        <button class="delete-button" (click)="deleteBook(book.id)">Delete</button>
+      </div>
+    </div>
+
+    <!-- Pagination controls -->
+    <div *ngIf="totalPages > 1" class="pagination">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  
+    <!-- Fallback if no books are available -->
+    <ng-template #noBooks>
+      <div class="no-books">
+        <p>No books available.</p>
+      </div>
+    </ng-template>
+  </div>
+  
