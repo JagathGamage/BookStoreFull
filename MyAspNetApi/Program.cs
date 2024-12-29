@@ -3,7 +3,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddControllers();
 
-// Add CORS if necessary
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", builder =>
@@ -12,7 +11,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add other services like Swagger, if required
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -27,7 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Enable CORS if needed
+
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
@@ -35,6 +34,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Configure Kestrel to listen on port 6000
-app.Run("http://localhost:5000"); // Specify the desired port here
+app.Run("http://localhost:5000"); 
 
 app.Run();
